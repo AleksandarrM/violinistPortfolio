@@ -1,0 +1,123 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+.career {
+  // Driven per-frame from Career.tsx; these are the resting (top-of-section) values.
+  --career-zoom: 1.25;
+  --career-blur: 0px;
+  --career-fade: 1;
+
+  position: relative;
+  border-top: 1px solid $line;
+
+  &__media {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 560px;
+    overflow: hidden;
+    background: $bg;
+
+    @include mobile {
+      height: 72vh;
+      min-height: 420px;
+    }
+  }
+
+  &__photo {
+    object-fit: cover;
+    object-position: center 35%;
+    transform: scale(var(--career-zoom));
+    filter: blur(var(--career-blur)) grayscale(10%) brightness(0.85);
+    opacity: var(--career-fade);
+    transform-origin: center;
+    will-change: transform, filter, opacity;
+  }
+
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.55) 0%,
+        rgba(10, 10, 10, 0.1) 30%,
+        rgba(10, 10, 10, 0.35) 65%,
+        $bg 100%
+      );
+  }
+
+  // Text scrolls up over the pinned photo, then the photo unpins and follows.
+  // The negative margin sets where the text first peeks in; min-height sets
+  // how much scroll distance the zoom/blur is spread across (~70vh).
+  &__body {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    min-height: 100vh;
+    margin: -28vh auto 0;
+    padding: 0 100px 180px;
+
+    @include tablet {
+      padding: 0 32px 120px;
+      margin-top: -24vh;
+    }
+
+    @include mobile {
+      min-height: 80vh;
+      padding: 0 20px 96px;
+      margin-top: -20vh;
+    }
+  }
+
+  &__kicker {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 24px;
+  }
+
+  &__line {
+    width: 40px;
+    height: 1px;
+    background: $gold;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: 400;
+    font-size: 44px;
+    margin-bottom: 28px;
+    color: $cream;
+    text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  &__text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: $muted;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+
+    & + & {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .career {
+    --career-zoom: 1;
+  }
+
+  .career__photo {
+    will-change: auto;
+  }
+}
