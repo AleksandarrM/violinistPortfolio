@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "compress:violin": "node scripts/compress-violin.mjs"
+    "compress:violin": "node scripts/compress-violin.mjs",
+    "process:violin-key": "node scripts/process-violin-key.mjs"
   },
   "dependencies": {
     "next": "16.3.5",

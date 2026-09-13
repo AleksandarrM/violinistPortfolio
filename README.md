@@ -9,8 +9,11 @@ Use Node 20+ (`nvm use`).
 ```bash
 npm install
 npm run compress:violin
+npm run process:violin-key
 npm run dev
 ```
+
+`process:violin-key` turns `assets/violin-key.gif` (white background) into the small transparent animated WebP used by the hero scroll cue.
 
 ## Audio
 

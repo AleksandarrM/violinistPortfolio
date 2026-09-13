@@ -77,14 +77,99 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   }
 
+  // Scroll cue: animated clef above a line with a light that runs down it.
   &__scroll {
     position: absolute;
     bottom: 40px;
     left: 50%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
     transform: translateX(-50%);
+    animation: hero-scroll-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+
+    &:hover .hero__scroll-icon,
+    &:focus-visible .hero__scroll-icon {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__scroll-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 14px rgba(201, 166, 107, 0.35));
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+
+    @include mobile {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__scroll-line {
+    position: relative;
     width: 1px;
     height: 60px;
+    overflow: hidden;
+    background: rgba(201, 166, 107, 0.22);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(transparent, $gold, transparent);
+      animation: hero-scroll-drop 1.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+  }
+}
+
+@keyframes hero-scroll-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes hero-scroll-drop {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(200%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll {
+    animation: none;
+  }
+
+  .hero__scroll-line {
     background: linear-gradient($gold, transparent);
-    z-index: 2;
+
+    &::after {
+      display: none;
+    }
   }
 }
