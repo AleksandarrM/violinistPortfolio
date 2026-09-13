@@ -2,22 +2,46 @@
 @use "../mixins" as *;
 
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 36px 64px;
+  background: rgba(10, 10, 10, 0);
+  border-bottom: 1px solid transparent;
+  transition:
+    padding 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    backdrop-filter 0.35s ease;
 
   @include tablet {
     padding: 28px 32px;
   }
 
   @include mobile {
-    padding: 22px 20px;
+    padding: 22px 16px;
+  }
+
+  // Translucent, blurred bar once the page has scrolled past the hero top.
+  &.is-scrolled {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    background: rgba(10, 10, 10, 0.72);
+    border-bottom-color: rgba(201, 166, 107, 0.18);
+    // No manual -webkit- prefix: Lightning CSS (Turbopack) would treat the
+    // hand-written prefix as the full set and drop the unprefixed property.
+    // It adds -webkit-backdrop-filter itself from the browserslist targets.
+    backdrop-filter: blur(14px) saturate(140%);
+
+    @include mobile {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
   }
 
   &__logo {
@@ -26,6 +50,11 @@
     letter-spacing: 1px;
     color: $cream;
     text-decoration: none;
+    white-space: nowrap;
+
+    @include mobile {
+      font-size: 17px;
+    }
   }
 
   &__list {
@@ -34,11 +63,14 @@
     gap: 40px;
 
     @include mobile {
-      gap: 20px;
+      gap: 12px;
     }
   }
 
   &__link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -46,8 +78,34 @@
     text-decoration: none;
     transition: color 0.2s ease;
 
-    &:hover {
+    @include mobile {
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    // Underline grows from the left on hover and exits to the right on leave.
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: $gold;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &:hover,
+    &:focus-visible {
       color: $gold;
+      outline: none;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
     }
   }
 }
