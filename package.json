@@ -1,0 +1,33 @@
+{
+  "name": "violin-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "compress:violin": "node scripts/compress-violin.mjs"
+  },
+  "dependencies": {
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "resend": "^6.2.2",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.2.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.182.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "sass": "^1.93.2",
+    "typescript": "^5"
+  }
+}

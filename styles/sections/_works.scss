@@ -1,0 +1,167 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+.works {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 160px 100px;
+  align-items: center;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    padding: 96px 32px;
+    gap: 40px;
+  }
+
+  @include mobile {
+    padding: 72px 20px;
+  }
+
+  &__model {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @include mobile {
+      height: 360px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 340px;
+      height: 340px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 166, 107, 0.15), transparent 70%);
+    }
+  }
+
+  &__canvas {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__placeholder {
+    z-index: 1;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $label;
+    border: 1px dashed $wave;
+    padding: 120px 60px;
+    text-align: center;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: 400;
+    font-size: 34px;
+    margin-bottom: 40px;
+    color: $cream;
+
+    @include mobile {
+      font-size: 28px;
+      margin-bottom: 28px;
+    }
+  }
+
+  &__note {
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: $label;
+  }
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 22px 0;
+  border: 0;
+  border-bottom: 1px solid $line;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover .track__play {
+    background: rgba(201, 166, 107, 0.08);
+  }
+
+  &.is-active .track__title {
+    color: $gold;
+  }
+
+  &.is-active .waveform span {
+    background: $gold;
+  }
+
+  &__meta {
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 15px;
+    color: $cream;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $label;
+  }
+
+  &__play {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid $gold;
+    color: $gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    justify-self: end;
+    transition: background 0.2s ease;
+  }
+}
+
+.waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  justify-self: center;
+
+  @include mobile {
+    display: none;
+  }
+
+  span {
+    width: 2px;
+    background: $wave;
+    display: block;
+  }
+}

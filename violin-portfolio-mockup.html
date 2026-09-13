@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Violin Portfolio — Design Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0A0A0A;
+    color:#F5F5F0;
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+  }
+
+  .frame { max-width:1440px; margin:0 auto; }
+
+  /* NAV */
+  nav {
+    position:absolute; top:0; left:0; right:0; z-index:10;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:36px 64px;
+  }
+  nav .logo { font-family:'Playfair Display', serif; font-size:20px; letter-spacing:1px; }
+  nav ul { list-style:none; display:flex; gap:40px; }
+  nav ul li { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#cfcfc9; }
+
+  /* HERO */
+  .hero {
+    position:relative; height:100vh; min-height:640px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    overflow:hidden;
+  }
+  /* uploaded photo, blended behind the headline */
+  .hero .photo {
+    position:absolute; inset:0;
+    background-image:url('hero-photo.jpg');
+    background-size:cover;
+    background-position:center 30%;
+    filter:grayscale(15%) brightness(0.7) contrast(1.05);
+  }
+  /* contrast scrim so headline stays legible over the photo */
+  .hero .scrim {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.45) 0%, rgba(10,10,10,0.55) 30%, rgba(10,10,10,0.85) 78%, #0A0A0A 100%),
+      radial-gradient(ellipse 60% 45% at 50% 48%, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.25) 65%, rgba(10,10,10,0) 100%);
+  }
+  .hero .content { position:relative; z-index:2; }
+  .hero .tagline {
+    font-size:12px; letter-spacing:4px; text-transform:uppercase; color:#C9A66B;
+    margin-bottom:24px;
+  }
+  .hero h1 {
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:120px;
+    line-height:0.95;
+    color:#F5F5F0;
+    text-shadow:0 8px 40px rgba(0,0,0,0.6);
+  }
+  .hero .sub {
+    margin-top:28px; font-size:15px; color:#c9c7c0; letter-spacing:1px;
+    text-shadow:0 2px 12px rgba(0,0,0,0.5);
+  }
+  .scroll-cue {
+    position:absolute; bottom:40px; left:50%; transform:translateX(-50%);
+    width:1px; height:60px; background:linear-gradient(#C9A66B, transparent);
+    z-index:2;
+  }
+
+  /* ABOUT */
+  .about {
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px;
+    align-items:center;
+    padding:160px 100px;
+  }
+  .about .img-wrap {
+    position:relative;
+    height:560px;
+    background-image:url('hero-photo.jpg');
+    background-size:cover;
+    background-position:center 25%;
+    border:1px solid #2a2a26;
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+  }
+  .about .text-col .kicker {
+    display:flex; align-items:center; gap:14px;
+    font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#C9A66B;
+    margin-bottom:24px;
+  }
+  .about .kicker .line { width:40px; height:1px; background:#C9A66B; }
+  .about h2 {
+    font-family:'Playfair Display', serif; font-weight:400; font-size:44px;
+    margin-bottom:28px; color:#F5F5F0;
+  }
+  .about p {
+    font-size:15px; line-height:1.9; color:#b7b5ad; max-width:480px;
+  }
+
+  /* BANNER — marquee of concert names */
+  .banner {
+    position:relative;
+    overflow:hidden;
+    padding:26px 0;
+    border-top:1px solid #232320; border-bottom:1px solid #232320;
+    background:#0d0d0c;
+  }
+  .banner .track-row {
+    display:flex; width:max-content;
+    animation:marquee 28s linear infinite;
+  }
+  .banner .track-row span {
+    font-family:'Playfair Display', serif; font-size:20px; font-weight:400;
+    color:#d8d5cb; white-space:nowrap; padding:0 36px;
+    display:flex; align-items:center; gap:36px;
+  }
+  .banner .track-row span::after {
+    content:'\2726'; font-size:11px; color:#C9A66B;
+  }
+  @keyframes marquee {
+    from { transform:translateX(0); }
+    to { transform:translateX(-50%); }
+  }
+
+  /* WORKS */
+  .works {
+    display:grid; grid-template-columns:1fr 1fr; gap:60px;
+    padding:160px 100px; align-items:center;
+  }
+  .works .model-wrap {
+    height:500px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .model-wrap::before {
+    content:''; position:absolute; width:450px; height:450px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,166,107,0.15), transparent 70%);
+  }
+  .model-wrap .placeholder {
+    z-index:1; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:#6b675c;
+    border:1px dashed #3a362e; padding:120px 60px; text-align:center;
+  }
+
+  .works .list h2 {
+    font-family:'Playfair Display', serif; font-weight:400; font-size:34px;
+    margin-bottom:40px; color:#F5F5F0;
+  }
+  .track {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 0; border-bottom:1px solid #232320;
+  }
+  .track .meta .title { font-size:15px; color:#F5F5F0; margin-bottom:6px; }
+  .track .meta .label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#6b675c; }
+  .track .play-btn {
+    width:44px; height:44px; border-radius:50%;
+    border:1px solid #C9A66B; color:#C9A66B;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    flex-shrink:0;
+  }
+  .waveform { display:flex; align-items:flex-end; gap:3px; height:20px; }
+  .waveform span { width:2px; background:#3a362e; }
+
+  /* CONTACT */
+  .contact {
+    text-align:center;
+    padding:180px 100px 160px;
+    border-top:1px solid #232320;
+  }
+  .contact .kicker {
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#C9A66B;
+    margin-bottom:24px;
+  }
+  .contact .kicker .line { width:40px; height:1px; background:#C9A66B; }
+  .contact h2 {
+    font-family:'Playfair Display', serif; font-weight:400; font-size:44px;
+    margin-bottom:20px; color:#F5F5F0;
+  }
+  .contact p {
+    font-size:15px; line-height:1.9; color:#b7b5ad; max-width:480px;
+    margin:0 auto 44px;
+  }
+  .contact .email-link {
+    display:inline-flex; align-items:center; gap:16px;
+    font-family:'Playfair Display', serif; font-size:28px; color:#F5F5F0;
+    border-bottom:1px solid #C9A66B; padding-bottom:10px;
+  }
+  .contact .email-link .arrow { color:#C9A66B; font-size:20px; }
+
+  /* FOOTER */
+  footer {
+    border-top:1px solid #232320;
+    padding:44px 100px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  footer .foot-left { font-size:11px; letter-spacing:1.5px; color:#5a564c; }
+  footer .socials { display:flex; gap:28px; }
+  footer .socials a {
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:#b7b5ad; text-decoration:none; border-bottom:1px solid transparent;
+  }
+  footer .foot-right { display:flex; align-items:center; gap:36px; }
+  footer .foot-right a {
+    font-size:11px; letter-spacing:1.5px; color:#5a564c; text-decoration:none;
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div class="hero">
+    <div class="photo"></div>
+    <div class="scrim"></div>
+    <nav>
+      <div class="logo">A. Violinist</div>
+      <ul><li>About</li><li>Works</li><li>Contact</li></ul>
+    </nav>
+    <div class="content">
+      <div class="tagline">Violin Artist &amp; Composer</div>
+      <h1>Lorem<br>Ipsum</h1>
+      <div class="sub">Classical &amp; contemporary works, performed with feeling</div>
+    </div>
+    <div class="scroll-cue"></div>
+  </div>
+
+  <div class="about">
+    <div class="img-wrap"></div>
+    <div class="text-col">
+      <div class="kicker"><span class="line"></span>About me</div>
+      <h2>The story behind the strings</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="track-row">
+      <span>Vienna Philharmonic Hall</span>
+      <span>Lorem Ipsum Chamber Series</span>
+      <span>Berlin Konzerthaus</span>
+      <span>Milan String Nights</span>
+      <span>Prague Autumn Festival</span>
+      <span>Vienna Philharmonic Hall</span>
+      <span>Lorem Ipsum Chamber Series</span>
+      <span>Berlin Konzerthaus</span>
+      <span>Milan String Nights</span>
+      <span>Prague Autumn Festival</span>
+    </div>
+  </div>
+
+  <div class="works">
+    <div class="model-wrap">
+      <div class="placeholder">3D Violin Model<br>(image placeholder)</div>
+    </div>
+    <div class="list">
+      <h2>Selected works</h2>
+
+      <div class="track">
+        <div class="meta">
+          <div class="title">Nocturne in Lorem</div>
+          <div class="label">Recording 01</div>
+        </div>
+        <div class="waveform">
+          <span style="height:6px"></span><span style="height:14px"></span><span style="height:9px"></span>
+          <span style="height:18px"></span><span style="height:7px"></span>
+        </div>
+        <div class="play-btn">&#9658;</div>
+      </div>
+
+      <div class="track">
+        <div class="meta">
+          <div class="title">Ipsum Suite No. 2</div>
+          <div class="label">Recording 02</div>
+        </div>
+        <div class="waveform">
+          <span style="height:10px"></span><span style="height:16px"></span><span style="height:6px"></span>
+          <span style="height:12px"></span><span style="height:8px"></span>
+        </div>
+        <div class="play-btn">&#9658;</div>
+      </div>
+
+      <div class="track">
+        <div class="meta">
+          <div class="title">Dolor Concerto</div>
+          <div class="label">Recording 03</div>
+        </div>
+        <div class="waveform">
+          <span style="height:8px"></span><span style="height:12px"></span><span style="height:17px"></span>
+          <span style="height:9px"></span><span style="height:6px"></span>
+        </div>
+        <div class="play-btn">&#9658;</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="kicker"><span class="line"></span>Get in touch<span class="line"></span></div>
+    <h2>Book a performance</h2>
+    <p>
+      For bookings, collaborations, or press inquiries, reach out directly —
+      every message is answered personally.
+    </p>
+    <a class="email-link" href="mailto:hello@loremipsumviolin.com">
+      hello@loremipsumviolin.com <span class="arrow">&#8594;</span>
+    </a>
+  </div>
+
+  <footer>
+    <div class="foot-left">© 2026 Lorem Ipsum Violin</div>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Spotify</a>
+      <a href="#">Facebook</a>
+    </div>
+    <div class="foot-right">
+      <a href="#">Privacy policy</a>
+      <a href="#">Terms</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

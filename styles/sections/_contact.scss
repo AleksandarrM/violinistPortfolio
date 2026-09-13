@@ -1,0 +1,167 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+.contact {
+  text-align: center;
+  padding: 180px 100px 160px;
+  border-top: 1px solid $line;
+
+  @include tablet {
+    padding: 96px 32px 80px;
+  }
+
+  @include mobile {
+    padding: 72px 20px 64px;
+  }
+
+  &__kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 24px;
+  }
+
+  &__line {
+    width: 40px;
+    height: 1px;
+    background: $gold;
+  }
+
+  &__title {
+    font-family: $font-serif;
+    font-weight: 400;
+    font-size: 44px;
+    margin-bottom: 20px;
+    color: $cream;
+
+    @include mobile {
+      font-size: 32px;
+    }
+  }
+
+  &__intro {
+    font-size: 15px;
+    line-height: 1.9;
+    color: $muted;
+    max-width: 480px;
+    margin: 0 auto 44px;
+  }
+
+  &__form {
+    max-width: 480px;
+    margin: 0 auto 40px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $gold;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    background: #111110;
+    border: 1px solid $line;
+    color: $cream;
+    font-family: $font-sans;
+    font-size: 15px;
+    font-weight: 300;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: $gold;
+    }
+  }
+
+  &__textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  &__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  &__submit {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 14px 28px;
+    border: 1px solid $gold;
+    background: transparent;
+    color: $gold;
+    font-family: $font-sans;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: $gold;
+      color: $bg;
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: wait;
+    }
+  }
+
+  &__status {
+    font-size: 14px;
+    line-height: 1.6;
+    color: $muted;
+
+    &.is-error {
+      color: #d4a0a0;
+    }
+
+    &.is-success {
+      color: $gold;
+    }
+  }
+
+  &__email {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-family: $font-serif;
+    font-size: 28px;
+    color: $cream;
+    text-decoration: none;
+    border-bottom: 1px solid $gold;
+    padding-bottom: 10px;
+
+    @include mobile {
+      font-size: 18px;
+    }
+  }
+
+  &__arrow {
+    color: $gold;
+    font-size: 20px;
+  }
+}

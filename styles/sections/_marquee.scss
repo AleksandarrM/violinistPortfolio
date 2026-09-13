@@ -1,0 +1,43 @@
+@use "../tokens" as *;
+
+.banner {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 0;
+  border-top: 1px solid $line;
+  border-bottom: 1px solid $line;
+  background: $bg-banner;
+}
+
+.banner__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.banner__item {
+  font-family: $font-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: $marquee;
+  white-space: nowrap;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+
+  &::after {
+    content: "\2726";
+    font-size: 11px;
+    color: $gold;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
